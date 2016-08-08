@@ -24,8 +24,530 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+
+
+
+				<section>
+					<p>Object Oriented </p>
+	    		<p class="fragment fade-up"> what is Object?</p>
+					<p class="fragment fade-up"> 1. Attributes: data/fields/properties </p>
+					<p class="fragment fade-up"> 2. Behavior:  Procedures/methods </p>
+					<p class="fragment fade-up"> Example: Pen, Duster , Person , Employee  </p>
+					<p class="fragment fade-up"> what is <a href="https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes" >Object oriented </a> ?</p>
+					<p class="fragment fade-up"> one of <a href="https://en.wikipedia.org/wiki/Programming_paradigm">Programming paradigm</a> </p>
+					<p class="fragment fade-up"> Programming: procedural (2nd) : Object-oriented(3rd) </p>
+
+				</section>
+
+				<section>  Feature | Characteristics of Object Oriented
+						<ul>
+
+							<li class="fragment fade-up"> Inheritance </li>
+							<li class="fragment fade-up"> Object Composition </li>
+							<li class="fragment fade-up"> Encapsulation: information hiding , strong form of abstraction (method implementation) detail hiding </li>
+							<li class="fragment fade-up"> Polymorphism </li>
+							<li class="fragment fade-up"> Dynamic dispatch | message passing </li>
+							<li class="fragment fade-up"> Open recursion:  use this or self to invoke same level method or property</li>
+						</ul>
+						<p class="fragment fade-up"> let’s look at object in JavaScript</p>
+				</section>
+
+
+
+				<section>
+					Object : one of the data type in JS
+
+						<pre class="fragment fade-up">
+Creates a new object
+<code class="hljs js" data-trim contenteditable>
+var o = { "a" : "value a"};
+
+// Example of an object property added with defineProperty with a data property descriptor
+
+var o = {};
+
+o.a = 1;
+// is equivalent to:
+Object.defineProperty(o, 'a', {
+  value: 1,
+  writable: true,
+  configurable: true,
+  enumerable: true
+});
+// so we can perform any action we want
+
+
+// On the other hand,
+Object.defineProperty(o, 'a', { value: 1 });
+// is equivalent to:
+Object.defineProperty(o, 'a', {
+  value: 1,
+  writable: false,
+  configurable: false,
+  enumerable: false
+});
+
+// property and method
+var obj = {
+	"key1" : "value of key1",
+	"method1" : function (){
+		console.log("output in console window from method1 this poperty can be overwrtiiten");
+	}
+}
+obj.key2 = "value from key2"
+obj.method2 = function (){
+	console.log("output in console window from method2 this poperty can be overwrtiiten");
+}
+
+Object.defineProperty(obj, 'method3', {
+  value: function(){ console.log("output in console window from method3.  this could be not overwrtiiten") },
+  writable: false,
+  configurable: false,
+  enumerable: false
+});
+
+							</code>
+						</pre>
+
+
+				</section>
+
+
+
+				<section>  property type
+					<p class="fragment fade-up">
+						writable :  true =  can change ,  false = no change
+					</p>
+					<p class="fragment fade-up">
+						enumerable : true =  Object.keys(o) or for...in loop ,
+					</p>
+					<p class="fragment fade-up">
+						configurable : The configurable attribute controls at the same time whether the property can be deleted from the object and whether its attributes (other than writable) can be changed.
+					</p>
+					<p class="fragment fade-up">
+					 so, ( writable , configurable ) are property one shloud care about
+					</p>
+					<p class="fragment fade-up">
+							with enumerable poperty some methods to itrate over object
+ 							<a target="_blank" href="https://developer.mozilla.org/en/docs/Web/JavaScript/Enumerability_and_ownership_of_properties">Detection Table</a>
+							in  : iterate over full prototype chain and return all keys even from inhertaed objects
+							Object.getOwnPropertyNames() ...all keys of own object
+							Object.keys() .... only enumerable properties
+							a for...in loop : only enumerable properties
+					<p>
+					<p class="fragment fade-up">
+
+								you see something like "Inhertance" :) what is Inhertance
+					</p>
+					</section>
+
+					<section>
+							inheritance : theory : normal humna child inhertance property and behviour of mankind
+							<p class="fragment fade-up"> based on approach of inheritance   </p>
+							<p class="fragment fade-up">1. Class-based : blue print of object : mobilex -> sim : JAVA</p>
+							<p class="fragment fade-up">2. prototype-based  : mobilex -> service : Javascript</p>
+							<p class="fragment fade-up"> Related classification : compostion , linking</p>
+							<p class="fragment fade-up">before we start tradtional inheritance in javaScript something to know about function</p>
+					</section>
+
+					<section>
+							fucntion as/for method
+
+							<p class="fragment fade-up">
+							 If the first token in a statement is function, then it is a function	statement.
+							</p>
+<pre class="fragment fade-up">
+1. function  as statement
+<code class="hljs js" data-trim contenteditable>
+
+function  hello(){
+console.log("hello from function method")
+
+}
+hello()
+</code>
+</pre>
+<pre class="fragment fade-up">
+2. function as expression
+<code class="hljs js" data-trim contenteditable>
+
+var hello = function optionalname(){
+
+console.log("hello  from expression fucntion");
+
+}
+// optionalname() will not work
+hello();
+</code>
+</pre>
+
+						</section>
+						<section> fucntion for constructors
+							<p class="fragment fade-up">
+							but before that lets see some hidden part of fucntion
+							</p>
+							<p class="fragment fade-up">
+								some default parameters which are not passed but avialbale in function Whlie a function is invoked
+							</p>
+							<ol>
+								<li class="fragment fade-up"> arguments
+									<ul>
+										<li>It contains all of the arguments from the invocation.</li>
+										<li>It is an array-like object.</li>
+									</ul>
+								</li>
+								<li class="fragment fade-up"> this
+									<ul>
+										<li>The this parameter contains a referenceto the object of invocation.</li>
+										<li>this allows a method to know what objectit is concerned with</li>
+									</ul>
+								</li>
+							</ol>
+							</section>
+							<section>example
+
+<pre class="fragment fade-up">
+lets look at that by first fucntion statement
+<code class="hljs js" data-trim contenteditable>
+
+fucntion hello(){
+console.log("hello from function method")
+console.log(this);
+console.log(arguments)
+}
+
+</code>
+// expands to
+// var hello = function hello() {};
+// which further expands to
+// var hello = undefined;
+// hello = function hello() {};
+
+// so hello() = window.hello()
+</pre>
+
+							</section>
+							<section> about function arguments
+								<ul>
+									<li>If a function is called with too many arguments, the extra arguments are ignored.</li>
+									<li>If a function is called with too few arguments, the missing values will be undefined </li>
+									<li>There is no implicit type checking on the arguments.</li>
+
+								</ul>
+							</section>
+							<section>
+<!--
+since of "arguments" and "this" are avialbele as special parameters in fucntion block after incvocation(calling) fucntion
+<br>
+<br> -->
+
+<b>ways of invocating(calling) function are below</b>
+<ol>
+	<li> simple procedureal method || ()
+	<li> Constructor with new operator|| new
+	<li> apply or call
+</ol>
+	</section>
+	<section>1. simple procedureal method
+<br>
+default return is undefined
+<pre class="fragment fade-up">
+()
+<code class="hljs js" data-trim contenteditable>
+function person(fname,lname){
+
+		console.log(fname);
+		console.log(lname);
+		this.fname = fname;
+		this.lname = lname;
+}
+person() = window.person();
+
+// window.fname
+// window.lname
+
+</code>
+</pre>
+<ul class="fragment fade-up">
+<li>so in this simple invocation only single instance(object) is attached and so it's property get replaced
+<li>what to do to have seprate property for seprate thing(object) i.e seprate object instance
+</ul>
+</section>
+<section>
+2. Constructor
+<br> default return is this
+<pre class="fragment fade-up">
+new
+<code class="hljs js" data-trim contenteditable>
+
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+
+}
+
+var p1 = new Person("abc","xyz");
+var p2 = new Person("AAA","ZZZ");
+
+// we have now two seprate instance p1 and p2 ...so blue print (class) is covered
+// oh object can have method/behviour as well as fields/attribute/
+
+// so lets define some method of blue print
+
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+		this.fullname = function (){
+				console.log("my full name is " this.fanme + this.lanme )
+		}
+}
+
+var p1 = new Person("abc","xyz");
+var p2 = new Person("AAA","ZZZ");
+
+console.log(p1);
+console.log(p2);
+</code>
+</pre>
+</section>
+<section>
+ methods/behviour are diffrent for same type Class ...not everytime right?
+<br>
+<br>
+so this kind of blue printing - object creation is wrong because it create more memory and why to create more memory for same thing
+<br>
+<br>
+so what is solution ?
+ans  : LINKING to comman place
+</section>
+<section>
+<h3>introducting prototype</h3>
+object type property of instance
+<pre class="fragment fade-up">
+<code class="hljs js" data-trim contenteditable>
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+
+}
+
+Person.prototype.fullname = function (){
+console.log("my full name is " this.fanme + this.lanme )
+}
+var p1 = new Person("abc","xyz");
+var p2 = new Person("AAA","ZZZ");
+
+console.log(p1);
+console.log(p2);
+</code>
+</pre>
+</section>
+<section>
+blue print - class  and linking( abstract class usage) covered
+<br>
+<br>
+but stil inheritance is missing
+<h3>indroducing inhertahnce</h3>
+
+<pre class="fragment fade-up">example
+<code class="hljs js" data-trim contenteditable>
+
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+}
+
+function Employee(fname,lname,desgination){
+		this.fname = fname
+		this.lname = lname
+		this.desgination = desgination
+}
+
+</code>
+but employee is poerson so why to recode that
+</pre>
+
+</section>
+<section>
+		Inheritance type
+<br>
+<ul class="fragment fade-up">
+<li>Pseudoclassical Inheritance</li>
+<li>prototypal inheritance</li>
+</ul>
+<pre class="fragment fade-up">
+Pseudoclassical Inheritance
+If we replace the original prototypeobject, then we can inherit another object's stuff.
+<code class="hljs js" data-trim contenteditable>
+
+
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+
+}
+
+Person.prototype.walk = function(){
+  console.log("I am walking!");
+};
+Person.prototype.run = function(){
+  console.log("I am running by !");
+};
+
+
+function Employee(fname,lname,desgination){
+
+		Person.call(this, fname,lname);
+		this.desgination = desgination
+
+}
+Employee.prototype.profile = function(){
+	console.log("i am " + this.fname + " at desgiantion " + this.desgination  )
+}
+
+var e1 = new Employee("xxx","yyy","zzz");
+
+</code>
+// e1.walk() or e1.run() not available
+</pre>
+
+</section>
+<section>
+Prototypal Inheritance
+<br>
+
+still we can not access prototype method of parent class
+
+<pre class="fragment fade-up">
+
+<code class="hljs js" data-trim contenteditable>
+function Person(fname,lname){
+		this.fname = fname
+		this.lname = lname
+}
+
+Person.prototype.walk = function(){
+  console.log("I am walking!");
+};
+
+Person.prototype.run = function(){
+  console.log("I am running by !");
+};
+
+function Employee(fname,lname,desgination){
+		Person.call(this, fname,lname);
+		this.desgination = desgination
+}
+
+Employee.prototype.profile = function(){
+	console.log("i am " + this.fname + " at desgiantion " + this.desgination  )
+}
+
+Employee.prototype =  Object.create(Person.prototype);
+
+Employee.prototype.profile2 = function(){
+	console.log("i am " + this.fname + " at desgiantion " + this.desgination  )
+}
+
+var e1 = new Employee("xxx","yyy","zzz");
+
+</code>
+Object.create() is prototyal inhetitance
+</pre>
+
+</section>
+<section>
+everything is okay but e1 "constructor" is wrong so <br>
+Set the "constructor" property to refer to Employee
+<pre class="fragment fade-up">
+
+<code class="hljs js" data-trim contenteditable>
+Employee.prototype.constructor = Employee
+
+
+</code>
+
+</pre>
+
+</section>
+<section>
+
+
+<ul>Function objects are first class
+<li>May assigned to a variable
+<li>May be stored in an object or array
+<li>May be passed as an argument to a function
+<li>May be returned from a function
+</ul>
+
+</section>
+<section>
+// property inhertance ..always easy
+<pre class="fragment fade-up">
+
+<code class="hljs js" data-trim contenteditable>
+
+var o1 = {};
+o1.a = 1;
+
+Object.defineProperty(o1, 'b', {
+  value: 'b1',
+  writable: false,
+  configurable: false,
+  enumerable: false
+});
+
+var o2 =  Object.create(o1);
+console.log(o2);
+console.log(o2.b);
+
+o2.a = 23;
+console.log(o2);
+
+
+</code>
+
+</pre>
+</section>
+<section>
+do care always
+<pre class="fragment fade-up">
+
+<code class="hljs js" data-trim contenteditable>
+
+var o1 = {};
+o1.a = 1;
+
+Object.defineProperty(o1, 'b', {
+  value: 'hello b',
+  writable: false,
+  configurable: false,
+  enumerable: false
+});
+
+var o2 =  Object.create(o1);
+console.log(o2);
+console.log(o2.b);
+
+o2.a = 23;
+console.log(o2.a);
+
+delete o2.a
+// magic begins
+console.log(o2.a);
+
+
+
+
+
+</code>
+
+</pre>
+</section>
+
+
+			
 			</div>
 		</div>
 
@@ -42,9 +564,19 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					//{ src: './plugin/externalcode/externalcode.js', condition: function() { return !!document.querySelector( '[data-code]' ); } },
 				]
 			});
+
+			 RevealEditor({
+        aceTheme: "ace/theme/twilight",
+        javascript: true,
+        html: true,
+        css: true,
+        fontSize: 18
+    });
+
 		</script>
 	</body>
 </html>
